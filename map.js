@@ -33,7 +33,7 @@ var geojsonlayer = L.geoJson(null, {
   			  fillColor: "cyan",
   			  fillOpacity: 0.7,
   			});
-        geojsonlayer.bindTooltip(feature.properties.kode);
+        geojsonlayer.bindTooltip(feature.properties.kode, {sticky: true});
   	  },
   	  mouseout: function (e) {
   			geojsonlayer.resetStyle(e.target);
@@ -47,6 +47,7 @@ var geojsonlayer = L.geoJson(null, {
 $.getJSON("wfsgeophp.php", function (data) {
   geojsonlayer.addData(data);
   map.addLayer(geojsonlayer);
+  map.fitBounds(geojsonlayer.getBounds());
 });
 
 /* Scale bar */
