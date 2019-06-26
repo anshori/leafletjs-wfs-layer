@@ -8,11 +8,11 @@ var basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
 basemap.addTo(map);
 
 /* GeoJSON layer */
-var geojsonlayerColor = {"A":"#81c8d9", "Qa":"#a6e91e", "Qc":"#ed4823", "Qmi":"#58d38f", "Qmo":"#6066e4", "Teon":"#6128db", "Tmj":"#d153c9", "Tmng":"#62c9b6", "Tmo":"#ca2482", "Tmpk":"#1fca2a", "Tmps":"#af58d7", "Tms":"#cec213", "Tmss":"#d98f2d", "Tmw":"#98df7a", "Tmwl":"#6aa1e8", "Tomk":"#e84e6a"};
+var geojsonlayerColor = {"KRB I":"#ffcc00", "KRB II":"#ff99cc", "KRB III":"#ff0066"};
 var geojsonlayer = L.geoJson(null, {
   style: function (feature) {
 	return {
-	  fillColor: geojsonlayerColor[feature.properties.kode],
+	  fillColor: geojsonlayerColor[feature.properties.Rawan_Benc],
 	  fillOpacity: 0.7, 
 	  color: "black",
 	  weight: 1,
@@ -20,9 +20,9 @@ var geojsonlayer = L.geoJson(null, {
 	};
   },
   onEachFeature: function (feature, layer) {
-    var content = "<b>Formasi " + feature.properties.FORMASI + "</b><br>" +
-      "Kode: " + feature.properties.kode + "<br><hr>" +
-      "<font style='font-size: 10px;'>Sumber: <a href='http://gis.jogjaprov.go.id/layers/geonode:geologi_ar_100k_rev' target='_blank'>http://gis.jogjaprov.go.id</a></font>";
+    var content = "<b>Rawan Bencana " + feature.properties.Rawan_Benc + "</b><br>" +
+      "Sumber: " + feature.properties.SUMBER + "<br><hr>" +
+      "<font style='font-size: 10px;'>Sumber: <a href='http://geoportal.slemankab.go.id/geoserver/geonode/wms?service=WMS&version=1.1.0&request=GetMap&layers=geonode:rawan_gunung_api&styles=&bbox=110.270125886,-7.79777489899993,110.491081062,-7.54116155899991&width=661&height=768&srs=EPSG:4326&format=application/openlayers' target='_blank'>http://geoportal.slemankab.go.id/</a></font>";
     layer.on({
   	  mouseover: function (e) {
   			var layer = e.target;
@@ -33,7 +33,7 @@ var geojsonlayer = L.geoJson(null, {
   			  fillColor: "cyan",
   			  fillOpacity: 0.7,
   			});
-        geojsonlayer.bindTooltip(feature.properties.kode, {sticky: true});
+        geojsonlayer.bindTooltip(feature.properties.Rawan_Benc, {sticky: true});
   	  },
   	  mouseout: function (e) {
   			geojsonlayer.resetStyle(e.target);
